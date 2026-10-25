@@ -327,13 +327,40 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
 .how dt{font-weight:700}
 .how dd b{font-weight:600;color:var(--ivory)}
 .how dd{color:#cfd3dc;line-height:1.65}
+
+/* ───── 편지: 네이비 편지지 ───── */
+.letter{position:relative;background:rgba(26,36,57,.9);color:var(--ivory);margin:0 16px;padding:60px 30px 52px}
+.letter::before,.letter::after{content:"";position:absolute;pointer-events:none}
+.letter::before{top:12px;left:12px;right:12px;bottom:12px;border:1px solid rgba(201,171,114,.45)}
+.letter::after{top:17px;left:17px;right:17px;bottom:17px;border:1px solid rgba(201,171,114,.18)}
+.letter .cn{border-color:var(--gold)}
+.letter .cn.tl{top:22px;left:22px}.letter .cn.tr{top:22px;right:22px}.letter .cn.bl{bottom:22px;left:22px}.letter .cn.br{bottom:22px;right:22px}
+.letter h2{color:var(--ivory)}
+.letter .body{margin-top:30px;padding-left:30px;font-family:var(--hand);font-size:22px;line-height:2;color:#e9e5dc;
+  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(2em - 1px),rgba(201,171,114,.13) calc(2em - 1px),rgba(201,171,114,.13) 2em)} /* taste-skill-ignore: 편지지 줄 */
+.letter .body p+p{margin-top:2em}
+.letter .from{margin-top:28px;text-align:right;font-family:var(--hand);font-size:24px;background:var(--foil);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+
+/* 유튜브 플레이어(소리만) + 노래 듣기 버튼 */
+#ytwrap{position:fixed;left:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none;overflow:hidden;z-index:-1}
+#ytwrap iframe{width:2px;height:2px}
+.music .mlabel{display:none}
+.music.needtap{width:auto;padding:0 16px 0 12px;gap:6px;border-radius:999px;background:var(--gold);color:var(--navy);animation:pulse 1.8s ease-in-out infinite}
+.music.needtap .mlabel{display:inline;font:700 14px var(--sans)}
+.music.needtap .wave,.music.needtap .off{display:none}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(201,171,114,.25)}}
+
+/* 아이폰 노치·홈 바 안전 영역 */
+.music{top:max(14px,calc(env(safe-area-inset-top) + 8px));right:max(14px,calc(env(safe-area-inset-right) + 10px))}
+.toast{bottom:max(28px,calc(env(safe-area-inset-bottom) + 16px))}
+.closing{padding-bottom:max(64px,calc(env(safe-area-inset-bottom) + 40px))}
 </style>
 </head>
 <body class="no-js">
 <script>document.body.classList.remove('no-js');document.documentElement.classList.add('locked');if('scrollRestoration' in history)history.scrollRestoration='manual';window.scrollTo(0,0)</script>
 
 <button class="music" id="musicBtn" type="button" aria-pressed="true" aria-label="소리 끄기" hidden>
-  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h3l4-3v10l-4-3H3z" fill="currentColor" stroke="none"/><path class="wave" d="M13 7.5a3.5 3.5 0 0 1 0 5M15.5 5a7 7 0 0 1 0 10"/><path class="off" d="M13 8l4 4M17 8l-4 4"/></svg>
+  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h3l4-3v10l-4-3H3z" fill="currentColor" stroke="none"/><path class="wave" d="M13 7.5a3.5 3.5 0 0 1 0 5M15.5 5a7 7 0 0 1 0 10"/><path class="off" d="M13 8l4 4M17 8l-4 4"/></svg><span class="mlabel">노래 듣기</span>
 </button>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -529,7 +556,8 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
 
   <!-- 3. 아버지께 -->
   <section class="letter" aria-labelledby="h-letter">
-    <h2 class="rv" id="h-letter">아버지께</h2>
+    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
+    <div class="head rv"><span class="vlabel" aria-hidden="true">書信</span><h2 id="h-letter">아버지께</h2></div>
     <div class="body">
       <p class="rv">아버지, 칠순을 진심으로 축하드립니다.</p>
       <p class="rv">일흔 해 동안 한결같이 가족을 지켜 주신 덕분에 저희가 이만큼 자랄 수 있었습니다. 평소 다 전하지 못한 감사한 마음을 이 자리를 빌려 올립니다.</p>
@@ -550,19 +578,21 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
     </div>
     <p class="made rv"><b>양승민 · 양승혁</b>이 준비했습니다</p>
     <p class="imprint">아버지 칠순 잔치 · 2026. 11. 7.</p>
-    <p class="imprint credit">배경 음악: 드뷔시 「달빛」, 연주 Laurens Goedhart · <a href="https://creativecommons.org/licenses/by/3.0/deed.ko" target="_blank" rel="noopener">CC BY 3.0</a> (형식 변환·음량 조정)</p>
+    <p class="imprint credit">♪ 노사연 「바램」</p>
   </footer>
 </main>
 
 <div class="toast" id="toast" role="status"></div>
 
 <!-- 음악: 곡을 정하면 src만 채우면 됩니다 -->
-<audio id="bgm" loop preload="auto" playsinline src="music/clair-de-lune.mp3"></audio>
+<!-- 배경 음악: 노사연 「바램」 (유튜브 공식 음원 RIAK OFFICIAL, 9PHIzu8lQsU) -->
+<div id="ytwrap" aria-hidden="true"><div id="yt"></div></div>
+<script src="https://www.youtube.com/iframe_api" async></script>
 
 <script>
 (function(){
   var $=function(s){return document.querySelector(s)}, html=document.documentElement;
-  var op=$('#opening'), cab=$('#cabinet'), bgm=$('#bgm'), mb=$('#musicBtn'), hasMusic=!!bgm.getAttribute('src');
+  var op=$('#opening'), cab=$('#cabinet'), mb=$('#musicBtn'), hasMusic=true;
   var toast=function(m){var t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('on')},1800)};
 
   // 열기 전에는 스크롤 잠금 (아이폰·갤럭시 손가락 스크롤까지)
@@ -592,9 +622,6 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
       var AC=window.AudioContext||window.webkitAudioContext; if(!AC)return;
       ac=new AC(); master=ac.createGain(); master.gain.value=1; master.connect(ac.destination);
       if(ac.state==='suspended')ac.resume();
-      if(hasMusic){
-        try{var src=ac.createMediaElementSource(bgm);musicGain=ac.createGain();musicGain.gain.value=0;src.connect(musicGain);musicGain.connect(master)}catch(e){musicGain=null}
-      }
     }catch(e){ac=null}
   }
   function noise(dur){var b=ac.createBuffer(1,Math.ceil(ac.sampleRate*dur),ac.sampleRate),d=b.getChannelData(0),last=0;for(var i=0;i<d.length;i++){var w=Math.random()*2-1;last=(last+.04*w)/1.04;d[i]=last*3.2}var s=ac.createBufferSource();s.buffer=b;return s}
@@ -612,19 +639,37 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
     if(!ac||!soundOn)return; var t=ac.currentTime+.02;
     clasp(t); door(t+.35,1.9); chime(t+1.15,[1318.5,1975.5,2637],.07); chime(t+1.6,[1568,2349.3],.045); thud(t+2.1);
   }
-  function startMusic(){
-    if(!hasMusic)return;
-    var p=bgm.play(); if(p&&p.catch)p.catch(function(){});
-    if(musicGain&&ac){var t=ac.currentTime;musicGain.gain.setValueAtTime(0.0001,t);musicGain.gain.linearRampToValueAtTime(0.0001,t+1.6);musicGain.gain.linearRampToValueAtTime(.55,t+6)}
-    else bgm.volume=.5;
+  // ── 배경 음악: 유튜브 공식 음원 (문 여는 터치에 맞춰 재생, 서서히 커짐) ──
+  var VID='9PHIzu8lQsU', yt=null, ytReady=false, wantPlay=false, fadeT=null;
+  window.onYouTubeIframeAPIReady=function(){
+    yt=new YT.Player('yt',{width:2,height:2,videoId:VID,
+      playerVars:{playsinline:1,controls:0,disablekb:1,fs:0,rel:0,loop:1,playlist:VID,iv_load_policy:3},
+      events:{onReady:function(){ytReady=true;yt.setVolume(0);if(wantPlay)playYT()},
+              onStateChange:function(e){if(e.data===1){mb.classList.remove('needtap');mb.setAttribute('aria-pressed',soundOn)}}}});
+  };
+  function fadeTo(target,ms){
+    clearInterval(fadeT);if(!yt||!yt.getVolume)return;
+    var v=yt.getVolume()||0,steps=Math.max(1,Math.round(ms/100)),d=(target-v)/steps,i=0;
+    fadeT=setInterval(function(){i++;v+=d;try{yt.setVolume(Math.round(v))}catch(e){};if(i>=steps)clearInterval(fadeT)},100);
   }
+  function playYT(){
+    if(!ytReady){wantPlay=true;return}
+    try{yt.unMute();yt.setVolume(0);yt.playVideo()}catch(e){}
+    setTimeout(function(){fadeTo(65,5000)},1200);
+    // 아이폰 등에서 자동 재생이 막히면 '노래 듣기' 버튼으로 안내
+    setTimeout(function(){try{if(soundOn&&yt.getPlayerState()!==1){mb.classList.add('needtap');mb.setAttribute('aria-label','노래 듣기')}}catch(e){}},3200);
+  }
+  function startMusic(){ if(hasMusic) playYT(); }
   function setSound(on){
     soundOn=on;mb.setAttribute('aria-pressed',on);mb.setAttribute('aria-label',on?'소리 끄기':'소리 켜기');
     if(ac){on?ac.resume():ac.suspend()}
-    if(hasMusic){if(on){var p=bgm.play();if(p&&p.catch)p.catch(function(){})}else bgm.pause()}
+    if(!yt||!ytReady)return;
+    if(on){try{yt.playVideo();fadeTo(65,1500)}catch(e){}}else{try{yt.pauseVideo()}catch(e){}}
   }
-  mb.addEventListener('click',function(){setSound(!soundOn)});
-  document.addEventListener('visibilitychange',function(){if(!hasMusic)return;if(document.hidden)bgm.pause();else if(soundOn&&op.classList.contains('open'))bgm.play().catch(function(){})});
+  mb.addEventListener('click',function(){
+    if(mb.classList.contains('needtap')){soundOn=true;try{yt.unMute();yt.playVideo();fadeTo(65,1500)}catch(e){};mb.classList.remove('needtap');mb.setAttribute('aria-pressed',true);return}
+    setSound(!soundOn)});
+  document.addEventListener('visibilitychange',function(){if(!yt||!ytReady)return;try{if(document.hidden)yt.pauseVideo();else if(soundOn&&op.classList.contains('open')&&!mb.classList.contains('needtap'))yt.playVideo()}catch(e){}});
 
   // 문 열기 = 첫 터치 → 이때부터 소리 허용 (아이폰·갤럭시 공통 규칙)
   function open(){
