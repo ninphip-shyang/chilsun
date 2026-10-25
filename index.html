@@ -286,6 +286,25 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
 .nakgwan{width:46px!important;height:46px!important;margin-left:-23px!important;bottom:40px!important}
 .no-js .plate2>span{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.plate2>span{opacity:1;transform:none;transition:none}.inner .ghost{opacity:.07}}
+
+/* ───── 7차: 금박·엠보싱·70 ───── */
+:root{--foil:linear-gradient(110deg,#a8864c 0%,#e9d39e 28%,#b8965a 48%,#f2dfae 68%,#a07f47 100%)} /* taste-skill-ignore: 금박 */
+/* 네이비 위 문살 무늬 엠보싱 (같은 색 계열로 아주 옅게) */
+/* 금박 글씨 */
+.opening .from,.after .honor,.hlabel,.vlabel,.poem .sign,.closing .hand,.dday,.p-top{background:var(--foil);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.poem .sign span{-webkit-text-fill-color:var(--soft)}
+/* 문살 금박 */
+.btn.gold{background:var(--foil);border-color:transparent}
+/* 카드 뒤 큰 70 */
+.inner .g70{font-family:var(--serif);font-weight:300;font-size:230px;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1px rgba(168,138,85,.55);transform:translate(-50%,-52%)}
+.open .inner .g70{opacity:.55}
+@media (prefers-reduced-motion:reduce){.inner .g70{opacity:.55}}
+
+/* 매듭 노리개 */
+.norigae{position:absolute;left:50%;top:calc(50% + 14px);width:38px;height:142px;margin-left:-19px;z-index:3;transform-origin:50% 0;opacity:0;animation:fadein .9s 1.8s forwards,sway 4.5s 2.6s ease-in-out infinite;transition:opacity .35s}
+@keyframes sway{0%,100%{transform:rotate(2.5deg)}50%{transform:rotate(-2.5deg)}}
+.open .norigae{opacity:0!important;animation:none}
+@media (prefers-reduced-motion:reduce){.norigae{animation:none;opacity:1}}
 </style>
 </head>
 <body class="no-js">
@@ -296,6 +315,7 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
 </button>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <linearGradient id="foil" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a8864c"/><stop offset=".35" stop-color="#e6cf98"/><stop offset=".55" stop-color="#b9975a"/><stop offset=".8" stop-color="#f0dcaa"/><stop offset="1" stop-color="#9c7c45"/></linearGradient>
   <symbol id="salMark" viewBox="0 0 26 26"><rect x="1" y="1" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M9 1v24M17 1v24M1 9h24M1 17h24" stroke="currentColor" stroke-width="1"/></symbol>
 </svg>
 
@@ -309,7 +329,7 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
     <div class="cabinet" id="cabinet" role="button" tabindex="-1" aria-label="문 열기">
       <div class="inner" aria-label="양창복 님 칠순을 축하드립니다">
         <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-        <span class="ghost" aria-hidden="true">壽</span>
+        <span class="ghost g70" aria-hidden="true">70</span>
         <div class="plate2" aria-hidden="true">
           <span class="p-top">2026. 11. 7.</span>
           <span class="p-name">양창복</span>
@@ -339,6 +359,17 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
       <div class="door l"><svg viewBox="0 0 100 266" preserveAspectRatio="none" aria-hidden="true"><rect class="face" width="100" height="266"/><path class="frame" pathLength="1" d="M3 3H97V263H3Z"/><path class="sal" pathLength="1" d="M22 3V263M40 263V3M58 3V263M76 263V3M3 30H97M97 36H3M3 42H97M3 128H97M97 134H3M3 140H97M3 224H97M97 230H3M3 236H97"/></svg></div>
       <div class="door r"><svg viewBox="0 0 100 266" preserveAspectRatio="none" aria-hidden="true"><rect class="face" width="100" height="266"/><path class="frame" pathLength="1" d="M97 3H3V263H97Z"/><path class="sal" pathLength="1" d="M78 3V263M60 263V3M42 3V263M24 263V3M97 30H3M3 36H97M97 42H3M97 128H3M3 134H97M97 140H3M97 224H3M3 230H97M97 236H3"/></svg></div>
       <svg class="clasp" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#c9ab72"/><circle cx="17" cy="17" r="11" fill="none" stroke="#1d2840" stroke-width="1.2"/><rect x="15.5" y="6" width="3" height="22" rx="1.5" fill="#1d2840"/></svg>
+      <svg class="norigae" viewBox="0 0 40 150" aria-hidden="true">
+        <path d="M20 0V22" stroke="#c9ab72" stroke-width="1.6"/>
+        <g fill="none" stroke="#9e2a22" stroke-width="2.6" stroke-linecap="round">
+          <path d="M20 22c-9 0-9 12 0 12s9-12 0-12"/><path d="M11 40c0-6 18-6 18 0s-18 6-18 0"/><path d="M20 34v14"/>
+        </g>
+        <rect x="14" y="48" width="12" height="9" rx="2" fill="#c9ab72"/>
+        <g stroke="#9e2a22" stroke-width="1.3" stroke-linecap="round">
+          <path d="M16 57L13 142M18 57L17 146M20 57V148M22 57L23 146M24 57L27 142M17 57L15 144M23 57L25 144"/>
+        </g>
+        <rect x="13" y="56" width="14" height="5" rx="1.5" fill="#7d1f19"/>
+      </svg>
       <div class="sheen" aria-hidden="true"></div>
     </div>
 
@@ -539,6 +570,7 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
   }
   $('#openBtn').addEventListener('click',open);
   cab.addEventListener('click',open);
+  if(/[?&]static/.test(location.search)){var st=document.createElement('style');st.textContent='.rv,.ink{opacity:1!important;filter:none!important;transform:none!important}.cal .day .fill{transform:scale(1)!important}.cal .day .ring{stroke-dashoffset:0!important}.cal .day em{color:var(--navy)!important}';document.head.appendChild(st)}
   if(/[?&]open/.test(location.search)){op.classList.add('open');cab.classList.add('open');locked=false;html.classList.remove('locked')}
 
   // 섹션 등장
