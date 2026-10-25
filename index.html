@@ -10,6 +10,7 @@
 <meta property="og:title" content="아버지의 칠순 잔치에 모십니다">
 <meta property="og:description" content="11월 7일 토요일 저녁 7시 30분 · 팔진향 한옥마을점">
 <meta name="theme-color" content="#121a2b">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;900&text=%E7%A5%9D%E4%B8%83%E6%97%AC%E6%A2%81%E6%98%8C%E7%A6%8F%E5%8D%B0%E5%A3%BD%E4%BA%8C%E3%80%87%E5%85%AD%E5%B9%B4%E5%8D%81%E4%B8%80%E6%9C%88%E6%97%A5%E6%8B%9B%E8%AB%8B%E6%84%9F%E8%AC%9D%E6%97%A5%E6%99%82%E5%A0%B4%E6%89%80%E8%90%AC%E7%84%A1%E7%96%86&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:"MaruBuri";font-weight:300;src:url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.woff2) format("woff2");font-display:swap}
 @font-face{font-family:"MaruBuri";font-weight:400;src:url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2) format("woff2");font-display:swap}
@@ -257,6 +258,19 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
 @keyframes foil{to{left:140%}}
 .no-js .col{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.col{opacity:1;transform:none;transition:none}.foil{display:none}}
+
+/* ───── 낙관·한자 글꼴 ───── */
+.col,.vlabel,.hlabel,.wm,.inner .tag{font-family:"Noto Serif KR","MaruBuri",serif}
+.col.main{font-weight:900;font-size:50px}
+.col.name{display:flex;align-items:center;font-size:19px;letter-spacing:.34em}
+.inner .tag{-webkit-writing-mode:horizontal-tb;writing-mode:horizontal-tb;display:flex;align-items:center;justify-content:center;width:22px;height:28px;border:1.5px solid #a3261d;border-radius:50%;color:#a3261d;margin-bottom:14px;letter-spacing:0}
+.inner .tag b{font-size:13px;font-weight:900}
+.nakgwan{position:absolute;left:50%;bottom:30px;width:72px;height:72px;margin-left:-36px;transform:rotate(-2deg) scale(1.15);opacity:0;transition:opacity .45s 2.15s,transform .7s 2.15s var(--ease)}
+.open .nakgwan{opacity:.95;transform:rotate(-2deg)}
+.plate{margin-top:-46px}
+.inner .seal{display:none}
+.no-js .nakgwan{opacity:.95}
+@media (prefers-reduced-motion:reduce){.nakgwan{opacity:.95;transform:rotate(-2deg);transition:none}}
 </style>
 </head>
 <body class="no-js">
@@ -283,9 +297,26 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
         <div class="plate" aria-hidden="true">
           <span class="col date">二〇二六年 十一月 七日</span>
           <span class="col main"><small>祝</small>七旬</span>
-          <span class="col name">양창복 님</span>
+          <span class="col name"><span class="tag" aria-hidden="true"><b>壽</b></span>梁昌福 님</span>
         </div>
-        <span class="seal" aria-hidden="true"><b>壽</b></span>
+        <svg class="nakgwan" viewBox="0 0 100 100" aria-hidden="true">
+          <defs>
+            <filter id="stamp" x="-10%" y="-10%" width="120%" height="120%">
+              <feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="2" seed="4" result="w"/>
+              <feDisplacementMap in="SourceGraphic" in2="w" scale="5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+              <feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="2" seed="11" result="g"/>
+              <feColorMatrix in="g" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -4 0 0 0 3.05" result="m"/>
+              <feComposite in="d" in2="m" operator="in"/>
+            </filter>
+          </defs>
+          <g filter="url(#stamp)">
+            <rect x="5" y="5" width="90" height="90" rx="4" fill="#a3261d"/>
+            <g fill="#f3efe6" font-family="'Noto Serif KR',serif" font-weight="900" font-size="38" text-anchor="middle">
+              <text x="71" y="45">梁</text><text x="71" y="86">昌</text>
+              <text x="29" y="45">福</text><text x="29" y="86">印</text>
+            </g>
+          </g>
+        </svg>
         <span class="foil" aria-hidden="true"></span>
       </div>
       <div class="door l"><svg viewBox="0 0 100 266" preserveAspectRatio="none" aria-hidden="true"><rect class="face" width="100" height="266"/><path class="frame" pathLength="1" d="M3 3H97V263H3Z"/><path class="sal" pathLength="1" d="M22 3V263M40 263V3M58 3V263M76 263V3M3 30H97M97 36H3M3 42H97M3 128H97M97 134H3M3 140H97M3 224H97M97 230H3M3 236H97"/></svg></div>
