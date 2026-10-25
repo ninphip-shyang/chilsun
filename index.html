@@ -578,21 +578,20 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
     </div>
     <p class="made rv"><b>양승민 · 양승혁</b>이 준비했습니다</p>
     <p class="imprint">아버지 칠순 잔치 · 2026. 11. 7.</p>
-    <p class="imprint credit">♪ 노사연 「바램」</p>
+    <p class="imprint credit">배경 음악: 드뷔시 「달빛」, 연주 Laurens Goedhart · <a href="https://creativecommons.org/licenses/by/3.0/deed.ko" target="_blank" rel="noopener">CC BY 3.0</a> (형식 변환·음량 조정)</p>
   </footer>
 </main>
 
 <div class="toast" id="toast" role="status"></div>
 
 <!-- 음악: 곡을 정하면 src만 채우면 됩니다 -->
-<!-- 배경 음악: 노사연 「바램」 (유튜브 공식 음원 RIAK OFFICIAL, 9PHIzu8lQsU) -->
-<div id="ytwrap" aria-hidden="true"><div id="yt"></div></div>
-<script src="https://www.youtube.com/iframe_api" async></script>
+<!-- 배경 음악: 드뷔시 「달빛」 (연주 Laurens Goedhart, CC BY 3.0) -->
+<audio id="bgm" loop preload="auto" playsinline src="music/clair-de-lune.mp3"></audio>
 
 <script>
 (function(){
   var $=function(s){return document.querySelector(s)}, html=document.documentElement;
-  var op=$('#opening'), cab=$('#cabinet'), mb=$('#musicBtn'), hasMusic=true;
+  var op=$('#opening'), cab=$('#cabinet'), bgm=$('#bgm'), mb=$('#musicBtn'), hasMusic=!!bgm.getAttribute('src');
   var toast=function(m){var t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('on')},1800)};
 
   // 열기 전에는 스크롤 잠금 (아이폰·갤럭시 손가락 스크롤까지)
@@ -622,6 +621,7 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
       var AC=window.AudioContext||window.webkitAudioContext; if(!AC)return;
       ac=new AC(); master=ac.createGain(); master.gain.value=1; master.connect(ac.destination);
       if(ac.state==='suspended')ac.resume();
+      try{var src=ac.createMediaElementSource(bgm);musicGain=ac.createGain();musicGain.gain.value=0;src.connect(musicGain);musicGain.connect(master)}catch(e){musicGain=null}
     }catch(e){ac=null}
   }
   function noise(dur){var b=ac.createBuffer(1,Math.ceil(ac.sampleRate*dur),ac.sampleRate),d=b.getChannelData(0),last=0;for(var i=0;i<d.length;i++){var w=Math.random()*2-1;last=(last+.04*w)/1.04;d[i]=last*3.2}var s=ac.createBufferSource();s.buffer=b;return s}
@@ -639,37 +639,23 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
     if(!ac||!soundOn)return; var t=ac.currentTime+.02;
     clasp(t); door(t+.35,1.9); chime(t+1.15,[1318.5,1975.5,2637],.07); chime(t+1.6,[1568,2349.3],.045); thud(t+2.1);
   }
-  // ── 배경 음악: 유튜브 공식 음원 (문 여는 터치에 맞춰 재생, 서서히 커짐) ──
-  var VID='9PHIzu8lQsU', yt=null, ytReady=false, wantPlay=false, fadeT=null;
-  window.onYouTubeIframeAPIReady=function(){
-    yt=new YT.Player('yt',{width:2,height:2,videoId:VID,
-      playerVars:{playsinline:1,controls:0,disablekb:1,fs:0,rel:0,loop:1,playlist:VID,iv_load_policy:3},
-      events:{onReady:function(){ytReady=true;yt.setVolume(0);if(wantPlay)playYT()},
-              onStateChange:function(e){if(e.data===1){mb.classList.remove('needtap');mb.setAttribute('aria-pressed',soundOn)}}}});
-  };
-  function fadeTo(target,ms){
-    clearInterval(fadeT);if(!yt||!yt.getVolume)return;
-    var v=yt.getVolume()||0,steps=Math.max(1,Math.round(ms/100)),d=(target-v)/steps,i=0;
-    fadeT=setInterval(function(){i++;v+=d;try{yt.setVolume(Math.round(v))}catch(e){};if(i>=steps)clearInterval(fadeT)},100);
+  // ── 배경 음악: 문 여는 터치에 맞춰 재생, 서서히 커짐 ──
+  function needTap(){mb.classList.add('needtap');mb.setAttribute('aria-label','노래 듣기')}
+  function startMusic(){
+    if(!hasMusic)return;
+    var p=bgm.play(); if(p&&p.catch)p.catch(needTap);
+    if(musicGain&&ac){var t=ac.currentTime;musicGain.gain.setValueAtTime(0.0001,t);musicGain.gain.linearRampToValueAtTime(0.0001,t+1.6);musicGain.gain.linearRampToValueAtTime(.55,t+6)}
+    else bgm.volume=.5;
   }
-  function playYT(){
-    if(!ytReady){wantPlay=true;return}
-    try{yt.unMute();yt.setVolume(0);yt.playVideo()}catch(e){}
-    setTimeout(function(){fadeTo(65,5000)},1200);
-    // 아이폰 등에서 자동 재생이 막히면 '노래 듣기' 버튼으로 안내
-    setTimeout(function(){try{if(soundOn&&yt.getPlayerState()!==1){mb.classList.add('needtap');mb.setAttribute('aria-label','노래 듣기')}}catch(e){}},3200);
-  }
-  function startMusic(){ if(hasMusic) playYT(); }
   function setSound(on){
     soundOn=on;mb.setAttribute('aria-pressed',on);mb.setAttribute('aria-label',on?'소리 끄기':'소리 켜기');
     if(ac){on?ac.resume():ac.suspend()}
-    if(!yt||!ytReady)return;
-    if(on){try{yt.playVideo();fadeTo(65,1500)}catch(e){}}else{try{yt.pauseVideo()}catch(e){}}
+    if(on){var p=bgm.play();if(p&&p.catch)p.catch(function(){})}else bgm.pause();
   }
   mb.addEventListener('click',function(){
-    if(mb.classList.contains('needtap')){soundOn=true;try{yt.unMute();yt.playVideo();fadeTo(65,1500)}catch(e){};mb.classList.remove('needtap');mb.setAttribute('aria-pressed',true);return}
+    if(mb.classList.contains('needtap')){mb.classList.remove('needtap');soundOn=true;mb.setAttribute('aria-pressed',true);if(ac)ac.resume();if(musicGain&&ac)musicGain.gain.setValueAtTime(.55,ac.currentTime);bgm.play().catch(function(){});return}
     setSound(!soundOn)});
-  document.addEventListener('visibilitychange',function(){if(!yt||!ytReady)return;try{if(document.hidden)yt.pauseVideo();else if(soundOn&&op.classList.contains('open')&&!mb.classList.contains('needtap'))yt.playVideo()}catch(e){}});
+  document.addEventListener('visibilitychange',function(){if(document.hidden)bgm.pause();else if(soundOn&&op.classList.contains('open')&&!mb.classList.contains('needtap'))bgm.play().catch(function(){})});
 
   // 문 열기 = 첫 터치 → 이때부터 소리 허용 (아이폰·갤럭시 공통 규칙)
   function open(){
