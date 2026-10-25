@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>노래 후보 듣기</title>
+<style>
+:root{color-scheme:dark}
+body{background:#121a2b;color:#f2efe8;font:16px/1.6 -apple-system,"Apple SD Gothic Neo",sans-serif;margin:0;padding:28px 18px}
+main{max-width:520px;margin:0 auto}
+h1{font-size:24px;margin:0 0 6px}
+p.lead{color:#aeb4c2;margin:0 0 24px}
+.item{background:#1a2439;padding:18px;margin-bottom:10px}
+.item h2{font-size:18px;margin:0}
+.item p{margin:4px 0 12px;color:#aeb4c2;font-size:15px}
+audio{width:100%}
+small{display:block;color:#8d95ab;font-size:13px;margin-top:8px}
+</style></head><body><main>
+<h1>노래 후보 듣기</h1>
+<p class="lead">앞부분 40초씩이에요. 한 곡을 틀면 다른 곡은 멈춰요. 저작권이 풀렸거나 출처만 밝히면 되는 곡만 골랐어요.</p>
+
+<div class="item"><h2>1. 쇼팽 — 녹턴 15-1 (F장조)</h2><p>잔잔하고 따뜻한 피아노. 저녁 식사 자리 분위기.</p><audio controls preload="none" src="1-chopin-nocturne.mp3"></audio><small>CC0 (자유 이용) · Wikimedia Commons</small></div>
+
+<div class="item"><h2>2. 사티 — 짐노페디 1번</h2><p>느리고 단정한 피아노. 가장 모던하고 조용한 느낌.</p><audio controls preload="none" src="2-satie-gymnopedie.mp3"></audio><small>CC0 (자유 이용) · Wikimedia Commons</small></div>
+
+<div class="item"><h2>3. 파헬벨 — 캐논</h2><p>누구나 아는 곡. 밝고 축하하는 느낌.</p><audio controls preload="none" src="3-pachelbel-canon.mp3"></audio><small>CC BY 3.0 · Kevin MacLeod (페이지 아래에 출처 한 줄 필요)</small></div>
+
+<div class="item"><h2>4. 드뷔시 — 달빛</h2><p>고급스럽고 서정적인 피아노. 네이비 밤 분위기와 잘 맞음.</p><audio controls preload="none" src="4-debussy-clair.mp3"></audio><small>CC BY 3.0 · Laurens Goedhart (출처 한 줄 필요)</small></div>
+
+<div class="item"><h2>5. 바흐 — G선상의 아리아</h2><p>현악기. 격식 있고 우아한 잔치 느낌.</p><audio controls preload="none" src="5-bach-air.mp3"></audio><small>CC BY 3.0 · Felted Classics (출처 한 줄 필요)</small></div>
+
+<div class="item"><h2>6. 남도 아리랑 (관현악)</h2><p>우리 가락. 한옥·전통 분위기와 어울림.</p><audio controls preload="none" src="6-namdo-arirang.mp3"></audio><small>CC BY 3.0 · marsilingco (출처 한 줄 필요)</small></div>
+
+<h1 style="margin-top:40px">새 후보</h1>
+<p class="lead">지금 쓰는 곡은 4번 드뷔시 「달빛」이에요.</p>
+
+<div class="item"><h2>7. 쇼팽 — 녹턴 9-2 (E♭장조)</h2><p>가장 유명한 녹턴. 따뜻하고 낭만적이라 생신 잔치에 무난.</p><audio controls preload="none" src="7-chopin-nocturne-9-2.mp3"></audio><small>CC0 (자유 이용) · Peter Johnston · 출처 표기 불필요</small></div>
+
+<div class="item"><h2>8. 리스트 — 사랑의 꿈 3번</h2><p>제목 그대로 '사랑'. 감정이 깊고 고급스러운 피아노.</p><audio controls preload="none" src="8-liszt-liebestraum.mp3"></audio><small>CC BY 3.0 · Felted Classics (출처 한 줄 필요)</small></div>
+
+<div class="item"><h2>9. 드뷔시 — 아라베스크 1번</h2><p>밝고 흐르는 느낌. 축하 자리에 산뜻함.</p><audio controls preload="none" src="9-debussy-arabesque.mp3"></audio><small>CC BY 3.0 · Felted Classics (출처 한 줄 필요)</small></div>
+
+<div class="item"><h2>10. 마스네 — 타이스의 명상곡 (바이올린)</h2><p>바이올린 독주. 한국 바이올리니스트 김봄소리 연주라 의미도 있음. 가장 격조 있음.</p><audio controls preload="none" src="10-meditation-thais.mp3"></audio><small>CC BY 3.0 · Premiere Performances / 김봄소리 (출처 한 줄 필요)</small></div>
+
+<div class="item"><h2>11. 바흐 — 평균율 프렐류드 1번 (C장조)</h2><p>맑고 단정한 피아노. 조용한 품격.</p><audio controls preload="none" src="11-bach-prelude-c.mp3"></audio><small>CC0 (자유 이용) · Kimiko Ishizaka · 출처 표기 불필요</small></div>
+
+<div class="item"><h2>12. 슈베르트 — 아베 마리아</h2><p>경건하고 따뜻함. 감사의 마음과 어울림.</p><audio controls preload="none" src="12-schubert-ave-maria.mp3"></audio><small>CC0 (자유 이용) · Free Tim · 출처 표기 불필요</small></div>
+</main>
+<script>document.querySelectorAll('audio').forEach(a=>a.addEventListener('play',()=>document.querySelectorAll('audio').forEach(b=>{if(b!==a)b.pause()})))</script>
+</body></html>
