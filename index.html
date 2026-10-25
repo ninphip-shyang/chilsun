@@ -10,6 +10,7 @@
 <meta property="og:title" content="아버지의 칠순 잔치에 모십니다">
 <meta property="og:description" content="11월 7일 토요일 저녁 7시 30분 · 팔진향 한옥마을점">
 <meta name="theme-color" content="#121a2b">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;900&text=%E7%A5%9D%E4%B8%83%E6%97%AC%E6%A2%81%E6%98%8C%E7%A6%8F%E5%8D%B0%E5%A3%BD%E4%BA%8C%E3%80%87%E5%85%AD%E5%B9%B4%E5%8D%81%E4%B8%80%E6%9C%88%E6%97%A5%E6%8B%9B%E8%AB%8B%E6%84%9F%E8%AC%9D%E6%97%A5%E6%99%82%E5%A0%B4%E6%89%80%E8%90%AC%E7%84%A1%E7%96%86&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:"MaruBuri";font-weight:300;src:url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.woff2) format("woff2");font-display:swap}
@@ -144,7 +145,7 @@ h2{font-weight:600;font-size:28px;line-height:1.3;letter-spacing:-.02em}
 /* 오시는 길 */
 .map{margin:30px auto 0;max-width:420px;background:var(--navy-2);position:relative}
 .map::before{content:"";display:block;padding-top:100%}
-.map svg{position:absolute;top:0;left:0;width:100%;height:100%;display:block}
+.map>svg{position:absolute;top:0;left:0;width:100%;height:100%;display:block}
 .map .route{stroke-dasharray:3 7}
 .map.in .route{animation:walk 1.6s linear infinite}
 @keyframes walk{to{stroke-dashoffset:-20}}
@@ -305,6 +306,22 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
 @keyframes sway{0%,100%{transform:rotate(2.5deg)}50%{transform:rotate(-2.5deg)}}
 .open .norigae{opacity:0!important;animation:none}
 @media (prefers-reduced-motion:reduce){.norigae{animation:none;opacity:1}}
+
+/* ───── 실제 지도 ───── */
+#lmap{position:absolute;top:0;left:0;right:0;bottom:0;background:#141c2d}
+#lmap .leaflet-tile-pane{filter:invert(1) hue-rotate(200deg) saturate(.3) brightness(.85) contrast(1.08) sepia(.15)}
+.leaflet-container{font-family:var(--sans)}
+.leaflet-control-attribution{background:rgba(18,26,43,.75)!important;color:#8d95ab!important;font-size:10px!important}
+.leaflet-control-attribution a{color:#aeb4c2!important}
+.leaflet-bar a{background:#1d2840!important;color:var(--gold)!important;border-color:#2e3b58!important}
+.mk-dest{display:flex;flex-direction:column;align-items:center;transform:translateY(-6px)}
+.mk-dest .pin{width:18px;height:18px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 6px rgba(201,171,114,.25),0 0 0 12px rgba(201,171,114,.10)}
+.mk-dest .lb,.mk-st .lb{margin-top:8px;white-space:nowrap;background:var(--ivory);color:var(--navy);font:700 13px var(--sans);padding:6px 10px}
+.mk-dest .lb small{display:block;font-weight:400;font-size:11px;color:#5d6375}
+.mk-st{display:flex;flex-direction:column;align-items:center}
+.mk-st .dot{width:12px;height:12px;border-radius:50%;background:var(--ivory);border:3px solid #6f86b6}
+.mk-st .lb{background:#1d2840;color:var(--ivory);font-weight:400;border:1px solid rgba(201,171,114,.45)}
+.walk-lb{white-space:nowrap;color:var(--gold);font:700 13px var(--sans);text-shadow:0 1px 3px #000}
 </style>
 </head>
 <body class="no-js">
@@ -430,33 +447,9 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
   <!-- 6. 오시는 길 -->
   <section class="poem place-sec" aria-labelledby="h-map" style="padding-top:0">
     <div class="head rv"><span class="vlabel" aria-hidden="true">場所</span><h2 id="h-map">오시는 길</h2></div>
-    <div class="map" id="map" role="img" aria-label="약도: 인천1호선 센트럴파크역 3번 출구에서 남동쪽으로 걸어 8분, 센트럴파크 호수 남쪽 송도 한옥마을 안 팔진향">
-      <svg viewBox="0 0 400 400" aria-hidden="true">
-        <rect width="400" height="400" fill="#1a2439"/>
-        <path d="M170 0H400V285Q340 300 300 282Q250 258 205 272Q175 280 165 245Z" fill="#202c45"/>
-        <path d="M245 0Q258 70 320 92Q380 112 400 110V0Z" fill="#2c3d5e"/>
-        <path d="M235 170Q300 142 352 172Q372 188 330 198Q272 208 235 170Z" fill="#2c3d5e"/>
-        <text x="338" y="52" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" fill="#8f9bb5">센트럴파크 호수</text>
-        <path d="M30 0L196 400" stroke="#2a3550" stroke-width="24"/>
-        <rect x="0" y="326" width="400" height="16" fill="#2a3550"/>
-        <path d="M30 0L196 400" stroke="#6f7f9f" stroke-width="2" stroke-dasharray="10 6"/>
-        <rect x="88" y="186" width="48" height="26" rx="13" fill="#f2efe8"/>
-        <text x="112" y="204" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#121a2b">인천1</text>
-        <text x="14" y="156" font-family="Pretendard,sans-serif" font-size="15" font-weight="700" fill="#f2efe8">센트럴파크역</text>
-        <text x="14" y="174" font-family="Pretendard,sans-serif" font-size="13" fill="#aeb4c2">3번 출구</text>
-        <path class="route" d="M138 201Q180 205 210 224T266 242" fill="none" stroke="#c9ab72" stroke-width="3.5" stroke-linecap="round"/>
-        <text x="146" y="270" font-family="Pretendard,sans-serif" font-size="14" font-weight="700" fill="#c9ab72">걸어서 8분 · 521m</text>
-        <g fill="#c9ab72">
-          <path d="M266 242L296 224L326 242Z"/><rect x="272" y="242" width="48" height="26"/>
-          <path d="M314 254L336 241L358 254Z"/><rect x="319" y="254" width="34" height="18"/>
-        </g>
-        <g class="pin"><path d="M296 218c-12 0-20-8.5-20-19 0-14 20-30 20-30s20 16 20 30c0 10.5-8 19-20 19z" fill="#f2efe8"/><circle cx="296" cy="198" r="6.5" fill="#121a2b"/></g>
-        <text x="304" y="296" text-anchor="middle" font-family="MaruBuri,serif" font-size="17" font-weight="600" fill="#f2efe8">송도 한옥마을</text>
-        <text x="304" y="315" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" fill="#aeb4c2">팔진향 · 나동 2층</text>
-        <rect x="222" y="352" width="64" height="30" fill="#2a3550"/>
-        <text x="254" y="396" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#8f9bb5">송도센트럴파크호텔</text>
-        <g transform="translate(370 364)"><path d="M0-16L7 6L0 1L-7 6Z" fill="#f2efe8"/><text y="20" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" fill="#f2efe8">N</text></g>
-      </svg>
+    <div class="map" id="map" role="img" aria-label="지도: 인천1호선 센트럴파크역 3번 출구에서 남동쪽으로 걸어 약 8분, 송도 한옥마을 안 팔진향">
+      <div id="lmap"></div>
+      <noscript><p style="position:absolute;top:45%;width:100%;text-align:center">인천 연수구 테크노파크로 180 나동 2층</p></noscript>
     </div>
     <p class="addr rv">팔진향 한옥마을점<small>인천 연수구 테크노파크로 180 나동 2층</small></p>
     <div class="btns rv">
@@ -598,6 +591,24 @@ body{background-color:var(--navy);background-image:url("data:image/svg+xml,%3Csv
     var data={title:'아버지의 칠순 잔치에 모십니다',text:'11월 7일 토요일 저녁 7시 30분 · 팔진향 한옥마을점',url:url()};
     if(navigator.share){navigator.share(data).catch(function(){})}else copy(data.url,'링크를 복사했어요. 카톡에 붙여 넣어 주세요');
   });
+})();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function(){
+  if(!window.L)return;
+  var DEST=[37.39085,126.63875], EXIT3=[37.393397,126.634971];
+  var route=[[37.393405,126.634991],[37.39325,126.635091],[37.393174,126.635139],[37.392995,126.635296],[37.392357,126.635721],[37.392141,126.635884],[37.391997,126.635993],[37.391986,126.636085],[37.391202,126.637377],[37.391189,126.637397],[37.39063,126.638319],DEST];
+  var m=L.map('lmap',{zoomControl:true,attributionControl:true,scrollWheelZoom:false,dragging:!L.Browser.mobile,tap:false,zoomSnap:.25});
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'}).addTo(m);m.attributionControl.setPrefix(false);
+  L.polyline(route,{color:'#c9ab72',weight:4,opacity:.95,dashArray:'2 9',lineCap:'round'}).addTo(m);
+  L.marker(DEST,{icon:L.divIcon({className:'',iconSize:[0,0],html:'<div class="mk-dest"><span class="pin"></span><span class="lb">팔진향 한옥마을점<small>송도 한옥마을 · 나동 2층</small></span></div>'})}).addTo(m);
+  L.marker(EXIT3,{icon:L.divIcon({className:'',iconSize:[0,0],html:'<div class="mk-st"><span class="dot"></span><span class="lb">센트럴파크역 3번 출구</span></div>'})}).addTo(m);
+  L.marker([37.39205,126.63705],{icon:L.divIcon({className:'',iconSize:[0,0],html:'<span class="walk-lb">걸어서 약 8분</span>'})}).addTo(m);
+  m.fitBounds(L.latLngBounds([EXIT3,DEST]).pad(.45));
+  var map=document.getElementById('map');
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){m.invalidateSize();io.disconnect()}});io.observe(map)}
 })();
 </script>
 </body>
